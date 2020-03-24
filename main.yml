@@ -1,0 +1,25 @@
+---
+- name: setup ec2_devops
+  hosts: web
+  become: yes
+  vars 
+
+
+tasks:
+  - name: install pakages
+    apt:
+      name: {{ item }}
+      state: latest
+      update_cache: yes
+    with_items:
+      - apache
+      - httpd
+      - mysql-server
+      - telnet
+      - curl
+      - nslookup
+  
+  - name: enable all the services
+    service:
+      name: 
+    
