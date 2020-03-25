@@ -6,6 +6,10 @@
     - packages.yml
 
   tasks:
+    - name: add oracle package repo
+      apt_repository:
+        repo: ppa:webupd8team/java
+        
     - name: install pakages
       apt:
         name: "{{ item }}"
@@ -19,7 +23,13 @@
         state: started
         enabled: yes
       with_items: "{{ packages }}"
-      
-    - name: install Oracle JDK
-      
     
+    - name: enable access to port 80,8080,3306
+      ufw:
+        rule: allow
+        port: "{{ item }}"
+        proto: tcp
+      with_items:
+        - '80'
+        - '8080'
+        - '3306'
