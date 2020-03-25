@@ -2,24 +2,24 @@
 - name: setup ec2_devops
   hosts: web
   become: yes
-  vars 
+  vars_files:
+    - packages.yml
 
-
-tasks:
-  - name: install pakages
-    apt:
-      name: {{ item }}
-      state: latest
-      update_cache: yes
-    with_items:
-      - apache
-      - httpd
-      - mysql-server
-      - telnet
-      - curl
-      - nslookup
-  
-  - name: enable all the services
-    service:
-      name: 
+  tasks:
+    - name: install pakages
+      apt:
+        name: "{{ item }}"
+        state: latest
+        update_cache: yes
+      with_items: "{{ packages }}"
+    
+    - name: enable all the services
+      service:
+        name: "{{ item }}"
+        state: started
+        enabled: yes
+      with_items: "{{ packages }}"
+      
+    - name: install Oracle JDK
+      
     
