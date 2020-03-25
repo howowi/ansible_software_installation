@@ -24,12 +24,9 @@
         enabled: yes
       with_items: "{{ packages }}"
     
-    - name: enable access to port 80,8080,3306
+    - name: enable access to ports defined
       ufw:
         rule: allow
         port: "{{ item }}"
         proto: tcp
-      with_items:
-        - '80'
-        - '8080'
-        - '3306'
+      with_items: "{{ ports }}"
