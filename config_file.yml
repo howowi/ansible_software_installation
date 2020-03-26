@@ -2,7 +2,7 @@
 #List down the packages to be installed on ec2_devops here
 
 services:
-  - oracle-java11-installer
+  - openjdk-11-jdk
   - httpd
   - tomcat
   - mysql-server
