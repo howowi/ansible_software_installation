@@ -6,10 +6,12 @@
     - config_file.yml
 
   tasks:
-    - name: add oracle package repo
-      apt_repository:
-        repo: ppa:linuxuprising/java
-        
+
+# ------- Cannot be used due to license issue -------------#
+#    - name: add oracle package repo
+#      apt_repository:
+#        repo: ppa:linuxuprising/java
+
     - name: install services
       apt:
         name: "{{ item }}"
