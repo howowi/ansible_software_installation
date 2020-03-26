@@ -2,7 +2,6 @@
 #List down the packages to be installed on ec2_devops here
 
 services:
-  - openjdk-11-jdk
   - httpd
   - tomcat
   - mysql-server
@@ -11,6 +10,7 @@ utilities:
   - telnet-client
   - curl
   - nslookup
+  - openjdk-11-jdk
 
 #List down the ports to be opened on ec2_devops
 ports:
