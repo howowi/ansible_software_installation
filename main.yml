@@ -8,7 +8,7 @@
   tasks:
     - name: add oracle package repo
       apt_repository:
-        repo: ppa:webupd8team/java
+        repo: ppa:linuxuprising/java
         
     - name: install services
       apt:
