@@ -1,11 +1,13 @@
 ---
 #List down the packages to be installed on ec2_devops here
 
-pakages:
+services:
   - oracle-java8-installer
   - httpd
   - tomcat
   - mysql-server
+  
+utilities:
   - telnet-client
   - curl
   - nslookup
