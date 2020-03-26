@@ -10,19 +10,26 @@
       apt_repository:
         repo: ppa:webupd8team/java
         
-    - name: install pakages
+    - name: install services
       apt:
         name: "{{ item }}"
         state: latest
         update_cache: yes
-      with_items: "{{ packages }}"
+      with_items: "{{ services }}"
+      
+    - name: install utilities
+      apt:
+        name: "{{ item }}"
+        state: latest
+        update_cache: yes
+      with_items: "{{ utilities }}"
     
     - name: enable all the services
       service:
         name: "{{ item }}"
         state: started
         enabled: yes
-      with_items: "{{ packages }}"
+      with_items: "{{ services }}"
     
     - name: enable access to ports defined
       ufw:
