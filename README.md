@@ -1,5 +1,4 @@
-# ansible_p2
-Problem #2 (Ansible)
+# Install software to the Ansible managed nodes
 
 Specify the packages to be installed and ports to be opened in the config_file.yml.
 
