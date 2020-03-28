@@ -1,6 +1,6 @@
 ---
 - name: setup ec2_devops
-  hosts: web
+  hosts: ec2
   become: yes
   vars_files:
     - "config_file_{{ ansible_facts['distribution'] }}.yml"
