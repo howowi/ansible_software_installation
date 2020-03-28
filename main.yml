@@ -3,7 +3,7 @@
   hosts: web
   become: yes
   vars_files:
-    - config_file.yml
+    - "config_file_{{ ansible_facts['distribution'] }}.yml"
 
   tasks:
 
@@ -12,26 +12,49 @@
 #      apt_repository:
 #        repo: ppa:linuxuprising/java
 
-    - name: install services
-      apt:
-        name: "{{ item }}"
+    - name: install "{{ utilities }}" on "{{ ansible_facts['distribution'] }}"
+      yum:
+        name: "{{ utilities }}"
         state: latest
         update_cache: yes
-      with_items: "{{ services }}"
-      
-    - name: install utilities
+      when: ansible_facts['distribution'] == "RedHat"
+
+    - name: install "{{ utilities }}" on "{{ ansible_facts['distribution'] }}"
       apt:
-        name: "{{ item }}"
+        name: "{{ utilities }}"
         state: latest
         update_cache: yes
-      with_items: "{{ utilities }}"
-    
+      when: ansible_facts['distribution'] == "Ubuntu"
+
+    - name: install "{{ services }}" on "{{ ansible_facts['distribution'] }}"
+      apt:
+        name: "{{ services }}"
+        state: latest
+        update_cache: yes
+      when: ansible_facts['distribution'] == "Ubuntu"
+ 
+    - name: install "{{ services }}" on "{{ ansible_facts['distribution'] }}"
+      yum:
+        name: "{{ services }}"
+        state: latest
+        update_cache: yes
+      when: ansible_facts['distribution'] == "RedHat"    
+
     - name: enable all the services
       service:
         name: "{{ item }}"
         state: started
         enabled: yes
       with_items: "{{ services }}"
+      when: item != "mysql-server"
+
+    - name: enable mysql
+      service:
+        name: mysql
+        state: started
+        enabled: yes
+      with_items: "{{ services }}"
+      when: item == "mysql-server"
     
     - name: enable access to ports defined
       ufw:
