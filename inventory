@@ -1,2 +1,2 @@
 [ec2]
-18.140.245.50 ansible_user=ec2-user
+3.0.51.123 ansible_user=ubuntu

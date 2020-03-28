@@ -1,0 +1,43 @@
+ECDSA key fingerprint is MD5:81:4b:03:33:66:f5:59:12:f0:cb:db:1e:5a:c4:69:c1.
+Are you sure you want to continue connecting (yes/no)? yes
+ok: [3.0.51.123]
+
+TASK [install "[u'telnet', u'curl', u'dnsutils', u'openjdk-11-jdk']" on RedHat] *********************************************************
+skipping: [3.0.51.123]
+
+TASK [install "[u'telnet', u'curl', u'dnsutils', u'openjdk-11-jdk']" on Ubuntu] *********************************************************
+changed: [3.0.51.123]
+
+TASK [install "[u'apache2', u'tomcat9', u'mysql-server']" on RedHat] ********************************************************************
+skipping: [3.0.51.123]
+
+TASK [install "[u'apache2', u'tomcat9', u'mysql-server']" on Ubuntu] ********************************************************************
+changed: [3.0.51.123]
+
+TASK [enable all the services on Ubuntu] ************************************************************************************************
+ok: [3.0.51.123] => (item=apache2)
+ok: [3.0.51.123] => (item=tomcat9)
+skipping: [3.0.51.123] => (item=mysql-server) 
+
+TASK [enable mysql on Ubuntu] ***********************************************************************************************************
+skipping: [3.0.51.123] => (item=apache2) 
+skipping: [3.0.51.123] => (item=tomcat9) 
+ok: [3.0.51.123] => (item=mysql-server)
+
+TASK [enable all the services on RedHat] ************************************************************************************************
+skipping: [3.0.51.123] => (item=apache2) 
+skipping: [3.0.51.123] => (item=tomcat9) 
+skipping: [3.0.51.123] => (item=mysql-server) 
+
+TASK [enable mysql on RedHat] ***********************************************************************************************************
+skipping: [3.0.51.123] => (item=apache2) 
+skipping: [3.0.51.123] => (item=tomcat9) 
+skipping: [3.0.51.123] => (item=mysql-server) 
+
+TASK [enable access to ports defined] ***************************************************************************************************
+changed: [3.0.51.123] => (item=80)
+changed: [3.0.51.123] => (item=8080)
+changed: [3.0.51.123] => (item=3066)
+
+PLAY RECAP ******************************************************************************************************************************
+3.0.51.123                 : ok=6    changed=3    unreachable=0    failed=0    skipped=4    rescued=0    ignored=0   
