@@ -12,33 +12,33 @@
 #      apt_repository:
 #        repo: ppa:linuxuprising/java
 
-    - name: install "{{ utilities }}" on "{{ ansible_facts['distribution'] }}"
+    - name: install "{{ utilities }}" on RedHat
       yum:
         name: "{{ utilities }}"
         state: latest
         update_cache: yes
       when: ansible_facts['distribution'] == "RedHat"
 
-    - name: install "{{ utilities }}" on "{{ ansible_facts['distribution'] }}"
+    - name: install "{{ utilities }}" on Ubuntu
       apt:
         name: "{{ utilities }}"
         state: latest
         update_cache: yes
       when: ansible_facts['distribution'] == "Ubuntu"
 
-    - name: install "{{ services }}" on "{{ ansible_facts['distribution'] }}"
+    - name: install "{{ services }}" on RedHat
       apt:
         name: "{{ services }}"
         state: latest
         update_cache: yes
-      when: ansible_facts['distribution'] == "Ubuntu"
+      when: ansible_facts['distribution'] == "RedHat"
  
-    - name: install "{{ services }}" on "{{ ansible_facts['distribution'] }}"
+    - name: install "{{ services }}" on Ubuntu
       yum:
         name: "{{ services }}"
         state: latest
         update_cache: yes
-      when: ansible_facts['distribution'] == "RedHat"    
+      when: ansible_facts['distribution'] == "Ubuntu"    
 
     - name: enable all the services
       service:
@@ -62,3 +62,4 @@
         port: "{{ item }}"
         proto: tcp
       with_items: "{{ ports }}"
+      when: ansible_facts['distribution'] == "Ubuntu"
