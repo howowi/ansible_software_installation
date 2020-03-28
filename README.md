@@ -24,5 +24,14 @@ Notes:
 [ec2]
 18.140.245.50 ansible_user=ec2-user
 ```
-## Variables
-1) There are 2 variable files namely `config_file_RedHat.yml` and `config_file_Ubuntu.yml`. As the name implies, these are the configuration files for RedHat a Ubuntu 
+## Installation Configuration
+1) There are 2 variable files namely `config_file_RedHat.yml` and `config_file_Ubuntu.yml`. As the name implies, these are the configuration files for the software installation on RedHat a Ubuntu respectively.
+2) In this assignment, Apache, Tomcat, MySQL services are required and the tcp ports of 80, 8080, and 3306 must be opened to allow the access to the respective services.
+3) There are a few utilities namely telnet, curl, nslookup and Oracle JDK (OpenJDK is used instead) required to support the tasks indicated.
+4) The challenge is that the package name of the same service/utility could be different between Ubuntu and Redhat. Hence, there are 2 variable files defining the diffent package names for the services.
+
+## Run the playbook!
+1) The last step is to run the playbook. In the `main.yml` file, Ansible will first gather facts about the managed nodes and it will intelligently identify the Linux distro of the manage nodes so there is no need to modify anything in the `main.yml` file.
+2) To run the playbook, simply type `$ ansible-playbook main.yml` and the installation will start immeditely. The playbook output is stored in `ansible_play_output.txt` for referencce.
+
+Lastly, refer to `deliverables.txt` for the output of the commands accessing the installed services. Enjoy!
