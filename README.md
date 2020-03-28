@@ -15,3 +15,5 @@ Assumption:
 3) To do that, ensure the SSH keys are generated. Otherwise run `$ ssh-keygen -t rsa -b 4096` to generate the SSH keys.
 4) After the keys are generated, run `$ ssh-copy-id <username>@<ip address of the target inventory>`. You will be prompt to key in the password for the target inventory.
 
+## Set up the inventory file
+1) 
