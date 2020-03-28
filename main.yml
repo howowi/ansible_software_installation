@@ -72,10 +72,19 @@
       with_items: "{{ services }}"
       when: item == "mariadb-server" and ansible_facts['distribution'] == "RedHat"
     
-    - name: enable access to ports defined
+    - name: enable access to ports defined on Ubuntu
       ufw:
         rule: allow
         port: "{{ item }}"
         proto: tcp
       with_items: "{{ ports }}"
       when: ansible_facts['distribution'] == "Ubuntu"
+
+    - name: enable access to ports defined on RedHat
+      iptables:
+        chain: INPUT
+        protocol: tcp
+        destination_port: "{{ item }}"
+        jump: ACCEPT
+      with_items: "{{ ports }}"
+      when: ansible_facts['distribution'] == "RedHat"
