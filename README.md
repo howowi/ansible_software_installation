@@ -1,9 +1,9 @@
 # Install software to the Ansible managed nodes
 
-Specify the packages to be installed and ports to be opened in the config_file.yml.
-
-Assumption: 
-1) Oracle JDK license has changed and now it requires logging in to an Oracle account to download the pakages. Hence, for the purpose of this assignment, OpenJDK-11 is used instead.
+Notes: 
+1) The Ansible Engine is running on local machine running RedHat OS and is managing the EC2 instance via SSH connection. 
+2) Oracle JDK license has changed and now it requires logging in to an Oracle account to download the pakages. Hence, for the purpose of this assignment, OpenJDK-11 is used instead.
+3) For Red Hat inventory, the community version of MySQL is MariaDB so the mariadb-server package is used. For Ubuntu inventory, mysql-server package is used.
 
 ## SSH to the inventories
 1) There are several ways to configure SSH access to the inventories such as 
@@ -16,4 +16,13 @@ Assumption:
 4) After the keys are generated, run `$ ssh-copy-id <username>@<ip address of the target inventory>`. You will be prompt to key in the password for the target inventory.
 
 ## Set up the inventory file
-1) 
+1) The inventory file is where the details of the managed nodes are defined.
+2) In this case, there's one managed node under the group `ec2` as seen below. There are 2 things need to take note of:
+* The IP address must be the Public IP address of the EC2 instance. 
+* The `ansible_user` is the user we use to connect to the node via SSH. The name of the user can be found in the AWS console.
+```
+[ec2]
+18.140.245.50 ansible_user=ec2-user
+```
+## Variables
+1) There are 2 variable files namely `config_file_RedHat.yml` and `config_file_Ubuntu.yml`. As the name implies, these are the configuration files for RedHat a Ubuntu 
