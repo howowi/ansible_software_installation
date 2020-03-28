@@ -2,15 +2,15 @@
 #List down the packages to be installed on ec2_devops here
 
 services:
-  - apache2
-  - tomcat9
-  - mysql-server
+  - httpd
+  - tomcat
+  - mariadb-server
   
 utilities:
   - telnet
   - curl
-  - dnsutils
-  - openjdk-11-jdk
+  - bind-utils
+  - java-11-openjdk
 
 #List down the ports to be opened on ec2_devops
 ports:

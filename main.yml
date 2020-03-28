@@ -27,34 +27,50 @@
       when: ansible_facts['distribution'] == "Ubuntu"
 
     - name: install "{{ services }}" on RedHat
-      apt:
+      yum:
         name: "{{ services }}"
         state: latest
         update_cache: yes
       when: ansible_facts['distribution'] == "RedHat"
  
     - name: install "{{ services }}" on Ubuntu
-      yum:
+      apt:
         name: "{{ services }}"
         state: latest
         update_cache: yes
       when: ansible_facts['distribution'] == "Ubuntu"    
 
-    - name: enable all the services
+    - name: enable all the services on Ubuntu
       service:
         name: "{{ item }}"
         state: started
         enabled: yes
       with_items: "{{ services }}"
-      when: item != "mysql-server"
+      when: item != "mysql-server" and ansible_facts['distribution'] == "Ubuntu"
 
-    - name: enable mysql
+    - name: enable mysql on Ubuntu
       service:
         name: mysql
         state: started
         enabled: yes
       with_items: "{{ services }}"
-      when: item == "mysql-server"
+      when: item == "mysql-server" and ansible_facts['distribution'] == "Ubuntu"
+
+    - name: enable all the services on RedHat
+      service:
+        name: "{{ item }}"
+        state: started
+        enabled: yes
+      with_items: "{{ services }}"
+      when: item != "mariadb-server" and ansible_facts['distribution'] == "RedHat"
+
+    - name: enable mysql on RedHat
+      service:
+        name: mariadb
+        state: started
+        enabled: yes
+      with_items: "{{ services }}"
+      when: item == "mariadb-server" and ansible_facts['distribution'] == "RedHat"
     
     - name: enable access to ports defined
       ufw:
