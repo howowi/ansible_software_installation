@@ -2,7 +2,7 @@
 
 Notes: 
 1) The Ansible Engine is running on local machine running RedHat OS and is managing the EC2 instance via SSH connection. 
-2) Oracle JDK license has changed and now it requires logging in to an Oracle account to download the pakages. Hence, for the purpose of this assignment, OpenJDK-11 is used instead.
+2) Oracle JDK licensing policy has changed and now it requires logging in to an Oracle account to download the packages. Hence, OpenJDK-11 is used instead.
 3) For Red Hat inventory, the community version of MySQL is MariaDB so the mariadb-server package is used. For Ubuntu inventory, mysql-server package is used.
 
 ## SSH to the inventories
@@ -14,6 +14,7 @@ Notes:
 2) The easiest and safest way (provided the Ansible host is not compromised) is to set up passwordless SSH connection using SSH keys.
 3) To do that, ensure the SSH keys are generated. Otherwise run `$ ssh-keygen -t rsa -b 4096` to generate the SSH keys.
 4) After the keys are generated, run `$ ssh-copy-id <username>@<ip address of the target inventory>`. You will be prompt to key in the password for the target inventory.
+5) For EC2 instances, you can define `ansible_ssh_private_key_file=<private key path>` in the inventory file as a host variable if the SSH private key must be used.
 
 ## Set up the inventory file
 1) The inventory file is where the details of the managed nodes are defined.
@@ -26,7 +27,7 @@ Notes:
 ```
 ## Installation Configuration
 1) There are 2 variable files namely `config_file_RedHat.yml` and `config_file_Ubuntu.yml`. As the name implies, these are the configuration files for the software installation on RedHat a Ubuntu respectively.
-2) In this assignment, Apache, Tomcat, MySQL services are required and the tcp ports of 80, 8080, and 3306 must be opened to allow the access to the respective services.
+2) In this set up, Apache, Tomcat, MySQL services are required and the tcp ports of 80, 8080, and 3306 must be opened to allow the access to the respective services.
 3) There are a few utilities namely telnet, curl, nslookup and Oracle JDK (OpenJDK is used instead) required to support the tasks indicated.
 4) The challenge is that the package name of the same service/utility could be different between Ubuntu and Redhat. Hence, there are 2 variable files defining the diffent package names for the services.
 
